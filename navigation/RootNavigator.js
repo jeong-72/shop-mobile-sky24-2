@@ -22,3 +22,4 @@ export default function RootNavigator() {
 const styles = StyleSheet.create({
 
 });
+
