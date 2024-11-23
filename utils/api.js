@@ -65,7 +65,7 @@ export async function addProduct(productData) {
 
 export async function deleteProduct(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/product/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/products/${id}`, {
       method: 'DELETE',
     });
     if (!response.ok) throw new Error('Failed to delete Product');

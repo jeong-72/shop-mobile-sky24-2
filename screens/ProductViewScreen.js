@@ -9,7 +9,7 @@ import { fetchProductById } from '../utils/api';
 export default function ProductViewScreen(props) {
 
   const { id } = props.route.params;
-  const [person, setPerson] = useState([null]);
+  const [product, setProduct] = useState([null]);
   const [offline, setOffline] = useState(false);
   const [error, setError] = useState([null]);
 
@@ -19,7 +19,7 @@ export default function ProductViewScreen(props) {
     const fetchData = async () => {
       try {
         const data = await fetchProductById(id);
-        setPerson(data);
+        setProduct(data);
         console.log(data)
       } catch (err) {
         console.error(err);
@@ -42,6 +42,11 @@ export default function ProductViewScreen(props) {
     >
       <Text variant="displaySmall">ProductViewScreen</Text>
       <Text>{id}</Text>
+      <Text>{product?.name}</Text>
+      <Text>{product?.price}</Text>
+      <Text>{product?.stock}</Text>
+      <Text>{product?.description}</Text>
+      <Text>{product?.categoryId}</Text>
       <Button mode="contained" icon="update" onPress={() => showShopView()}>
         GoBack
       </Button>
