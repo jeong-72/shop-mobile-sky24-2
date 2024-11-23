@@ -5,27 +5,29 @@ import ShopViewScreen from '../screens/ShopViewScreen';
 import ProductViewScreen from '../screens/ProductViewScreen';
 import ProductEditScreen from '../screens/ProductEditScreen';
 
-
-
-
 const Stack = createStackNavigator();
 
 export default function ShopNavigator() {
   return (
-    <Stack.Navigator initialRouteName='ShopView'>
+    <Stack.Navigator
+      initialRouteName="ShopView"
+      screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen
-        name='ShopView'
+        name="ShopView"
         component={ShopViewScreen}
+        options={{ title: "View Shop" }}
       />
       <Stack.Screen
-        name='ProductView'
+        name="ProductView"
         component={ProductViewScreen}
+        options={{ title: "View Product" }}
       />
       <Stack.Screen
-        name='ProductEdit'
+        name="ProductEdit"
         component={ProductEditScreen}
+        options={{ title: "Edit Product" }}
       />
-
     </Stack.Navigator>
   );
 }

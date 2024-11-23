@@ -5,6 +5,7 @@ import MainNavigator from "./MainNavigator";
 import NotFoundScreen from "../screens/NotFoundScreen";
 
 
+
 const Stack = createStackNavigator();
 
 export default function RootNavigator() {
