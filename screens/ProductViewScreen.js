@@ -9,6 +9,7 @@ import { fetchProductById } from '../utils/api';
 export default function ProductViewScreen(props) {
 
   const { id } = props.route.params;
+  theme = useTheme();
   const [product, setProduct] = useState([null]);
   const [offline, setOffline] = useState(false);
   const [error, setError] = useState([null]);
@@ -31,25 +32,97 @@ export default function ProductViewScreen(props) {
     fetchData();
   }, []);
 
+  if (!product) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <Text>Loading product data</Text>
+      </View>
+
+    );
+  }
+
   function showShopView() {
     props.navigation.navigate("ShopView");
   }
   // #endregion
   
   return (
-    <Surface
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-    >
-      <Text variant="displaySmall">ProductViewScreen</Text>
-      <Text>{id}</Text>
-      <Text>{product?.name}</Text>
-      <Text>{product?.price}</Text>
-      <Text>{product?.stock}</Text>
-      <Text>{product?.description}</Text>
-      <Text>{product?.categoryId}</Text>
-      <Button mode="contained" icon="update" onPress={() => showShopView()}>
-        GoBack
-      </Button>
+    <Surface style={{ flex: 1, padding: 16 }}>
+      <Text
+        variant="headlineLarge"
+        style={{
+          marginHorizontal: 10,
+          marginBottom: 24,
+          fontWeight: "bold",
+          color: theme.colors.primary,
+        }}
+      >
+        {product?.name}
+      </Text>
+      <View style={{ flex: 1, marginTop: 24 }}>
+        {[
+          { label: "Name:", value: product.name },
+          { label: "Price:", value: product.price },
+          { label: "Stock:", value: product.stock },
+          { label: "Description:", value: product.description },
+          { label: "Category:", value: product.Category?.name },
+        ].map(({ label, value }, index) => (
+          <View key={index} style={{ marginBottom: 20, paddingHorizontal: 12 }}>
+            <Text
+              variant="bodyMedium"
+              style={{
+                fontWeight: "bold",
+                marginBottom: 6,
+                color: "#5D5D5D",
+                fontSize: 16,
+              }}
+            >
+              {label}
+            </Text>
+            <Text
+              variant="bodyMedium"
+              style={{
+                color: "#2C3E50",
+                fontSize: 14,
+                lineHeight: 22,
+                paddingBottom: 10,
+                borderBottomWidth: 1,
+                borderBottomColor: "#BDC3C7",
+              }}
+            >
+              {value}
+            </Text>
+          </View>
+
+
+          
+        ))}
+      </View>
+                <View style={{ padding: 10 }}>
+                  <Button
+                    mode="contained"
+                    icon="keyboard-return"
+                    onPress={showshopview}
+                    style={{
+                      width: "100%",
+                    }}
+                  >
+                    Go Back
+                  </Button>
+                </View>
     </Surface>
   );
 }
+
+
+
+      // <Text variant="displaySmall">ProductViewScreen</Text>
+      // <Text>{id}</Text>
+      // <Text>{product?.name}</Text>
+      // <Text>{product?.price}</Text>
+      // <Text>{product?.stock}</Text>
+      // <Text>{product?.description}</Text>
+      // <Text>{product?.categoryId}</Text>
+      // <Button mode="contained" icon="update" onPress={() => showShopView()}>
+      //   GoBack
+      // </Button>
